@@ -40,9 +40,9 @@ app.get('/error', function (req, res) {
 
 app.get('/chuck', chuck)
 
-// setInterval(function () {
-//     console.log(faker.lorem.paragraph());
-// }, 100)
+setInterval(function () {
+    console.log(faker.lorem.paragraph());
+}, 1000)
 
 app.get('/counter', function(req, res){
     res.writeHead(200, {
@@ -56,6 +56,10 @@ app.get('/counter', function(req, res){
 })
 
 function myFunction(req, res, id) {
+    req.on('close', function(){
+        console.log('request closed')
+        return
+    })
     let lines = data.split("\n");
     if (id === lines.length - 1) {
         res.end()
